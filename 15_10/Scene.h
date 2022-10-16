@@ -14,6 +14,8 @@ private:
 public:
 	Scene();
 	~Scene();
+
 	void addModel(Model* model);
 	void drawScene(ShaderProgram* program);
+	void setModelMatrixOfModel(glm::mat4 modelMatrix, int i);
 };

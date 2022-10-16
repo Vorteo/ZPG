@@ -49,3 +49,10 @@ glm::mat4 Model::getModelMatrix()
 {
 	return this->modelMatrix;
 }
+
+void Model::setModelMatrix(glm::mat4 modelMatrix)
+{
+	this->modelMatrix = modelMatrix;
+}
+
+

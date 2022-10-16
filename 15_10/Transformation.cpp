@@ -2,26 +2,20 @@
 
 Transformation::Transformation()
 {
-	this->M = glm::mat4(1.0f);
+	this->modelMatrix = glm::mat4(1.0f);
 }
 
-glm::mat4 Transformation::scaleModel()
+void Transformation::scaleModel(glm::vec3 ratio)
 {
-	this->M = glm::scale(M, glm::vec3(0.7f));
-
-	return M;
+	this->modelMatrix = glm::scale(glm::mat4(1.0f), ratio);
 }
 
-glm::mat4 Transformation::translateModel()
+void Transformation::translateModel(glm::vec3 translation)
 {
-	this->M = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
-
-	return M;
+	this->modelMatrix = glm::translate(glm::mat4(1.0f), translation);
 }
 
-glm::mat4 Transformation::rotateModel()
+void Transformation::rotateModel(glm::vec3 axis)
 {
-	this->M = glm::rotate(M, (GLfloat)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-
-	return M;
+	this->modelMatrix = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), axis);
 }
