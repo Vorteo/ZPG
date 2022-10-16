@@ -3,8 +3,9 @@
 #define MODEL_H
 
 #include "Headers.h"
+#include "Transformation.h"
 
-class Model
+class Model : public Transformation
 {
 private:
 	float *points;
@@ -13,7 +14,7 @@ private:
 	GLuint VBO;
 	GLuint VAO;
 
-	glm::mat4 modelMatrix;
+	// glm::mat4 modelMatrix;
 
 public:
 	Model();
@@ -21,6 +22,7 @@ public:
 	~Model();
 	void drawModel();
 	glm::mat4 getModelMatrix();
+	void setModelMatrix(glm::mat4 modelMatrix);
 
 };
 #endif

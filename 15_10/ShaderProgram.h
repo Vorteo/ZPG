@@ -6,6 +6,7 @@
 #include "VertexShader.h"
 #include "FragmentShader.h"
 
+class Camera;
 class ShaderProgram {
 private:
 	GLuint Program;
