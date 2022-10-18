@@ -79,7 +79,7 @@ void Camera::updateDeltaTime()
 
 float Camera::getCameraSpeed()
 {	
-	this->cameraSpeed = 3.5f * this->deltaTime;
+	this->cameraSpeed = 40.f * this->deltaTime;
 
 	return this->cameraSpeed;
 }

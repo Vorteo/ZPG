@@ -25,7 +25,7 @@ GLint ShaderProgram::getModelMatrix()
 		return idModelTransform;
 	}
 
-	return idModelTransform;
+	exit(EXIT_FAILURE);
 }
 
 GLuint ShaderProgram::getShaderProgram()

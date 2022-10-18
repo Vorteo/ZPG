@@ -1,18 +1,9 @@
 #include "Application.h";
 #include "Model.h"
-
-float points[] = {
-	 //position			// color
-   -0.5f, 0.5f, 0.f,  1.0f, 0.0f, 0.0f, // top left point
-	0.5f, 0.5f, 0.f,  0.0f, 1.0f, 0.0f,// top right point
-	0.5f, -0.5f, 0.f, 0.0f, 0.0f, 1.0f, // bottom right point
-	0.5f, -0.5f, 0.f, 1.0f, 1.0f, 0.0f,// bottom right point
-   -0.5f, -0.5f, 0.f, 0.0f, 1.0f, 1.0f,// bottom left point
-   -0.5f, 0.5f, 0.f,  1.0f, 0.0f, 1.0f,// top left point
-};
-
+#include "Models/sphere.h"
+#include "Models/suzi_flat.h"
  
-float b[] = {
+const float b[] = {
 		0.1f, 0.0f, 0.0f,   1, 0, 0,
 	    0.1f, 0.5f, 0.0f,  0, 1, 0,
 	    0.5f, 0.0f, 0.0f,  0, 0, 1,
@@ -22,7 +13,7 @@ float b[] = {
 		0.5f, 0.0f, 0.0f,  0, 0, 1,
 };
 
-float c[] = {
+const float c[] = {
 		-0.1f, 0.0f, 0.0f,   1, 1, 0,
 		-0.1f, 0.5f, 0.0f,  0, 1, 1,
 		-0.5f, 0.0f, 0.0f,  1, 0, 1,
@@ -34,11 +25,11 @@ int main(void)
 	Application* Application = Application->GetInstance();
 
 
-	Model* model = new Model(b, sizeof(b)/sizeof(b[0]));
-	Model* model2 = new Model(c, sizeof(c) / sizeof(c[0]));
+	Model* sphereModel = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
+	Application->AddModel(sphereModel);
 
-	Application->AddModel(model);
-	Application->AddModel(model2);
+	//Model* suzieModel = new Model(suziFlat, sizeof(suziFlat) / sizeof(suziFlat[0]));
+	//Application->AddModel(suzieModel);
 
 	Application->CheckStatus();
 	Application->Run();

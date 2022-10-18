@@ -8,7 +8,7 @@
 class Model : public Transformation
 {
 private:
-	float *points;
+	const float *points;
 	int size;
 
 	GLuint VBO;
@@ -18,7 +18,7 @@ private:
 
 public:
 	Model();
-	Model(float points[], int size);
+	Model(const float points[], int size);
 	~Model();
 	void drawModel();
 	glm::mat4 getModelMatrix();

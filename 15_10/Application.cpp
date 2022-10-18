@@ -110,18 +110,18 @@ void Application::Setup()
 
 void Application::Run()
 {
+	glEnable(GL_DEPTH_TEST);
+
+
 	// PROJECTION Matrix
 	glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
 
 	while (!glfwWindowShouldClose(this->window))
 	{
-		// UPDATE deltaTime per frame
-		this->camera->updateDeltaTime();
-
 		// clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
 		this->shaderProgram->UseProgram();
+		
 
 		// VIEW Matrix		
 		glm::mat4 viewMatrix = this->camera->getCamera();
@@ -132,6 +132,9 @@ void Application::Run()
 		glUniformMatrix4fv(modelViewMatrix, 1, GL_FALSE, &viewMatrix[0][0]);
 		glUniformMatrix4fv(modelProjectionMatrix, 1, GL_FALSE, &projectionMatrix[0][0]);
 		
+		// UPDATE deltaTime per frame
+		this->camera->updateDeltaTime();
+
 		//DRAW
 		this->scene->drawScene(this->shaderProgram);
 

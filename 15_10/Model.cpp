@@ -11,11 +11,12 @@ Model::Model()
 	this->modelMatrix = glm::mat4(1.0f);
 }
 
-Model::Model(float points[],int size)
+Model::Model(const float points[],int size)
 {
 
 	this->points = points;
 	this->size = size;
+
 	this->modelMatrix = glm::mat4(1.0f);
 
 	this->VBO = 0;
@@ -28,9 +29,8 @@ Model::Model(float points[],int size)
 	glBindVertexArray(this->VAO); //bind the VAO
 	glEnableVertexAttribArray(0); //enable vertex attributes
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(this->points[0]) * 6, (GLvoid*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(this->points[0]) * 6, (GLvoid*)(sizeof(float) * 3));
-	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)3);
  
 }
 

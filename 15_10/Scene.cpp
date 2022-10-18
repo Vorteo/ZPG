@@ -19,23 +19,13 @@ void Scene::addModel(Model* model)
 
 void Scene::drawScene(ShaderProgram* program)
 {
-	glm::mat4 Mat1 = glm::rotate(glm::mat4(1.0f), (GLfloat)glfwGetTime(), glm::vec3(0.0f, 0.0f , 1.0f));
-
-	// parameters for rotate, scale, translate
-	glm::vec3 ratio = glm::vec3(0.7f);
-	glm::vec3 axis = glm::vec3(0.0f, 0.0f, 1.0f);
-	glm::vec3 translation = glm::vec3(2.0f, 0.0f, 0.0f);
-
 	for (Model* model : this->models)
 	{
-		model->setModelMatrix(Mat1);
 		glm::mat4 M = model->getModelMatrix();
-
-		/* 
-		model->scaleModel(ratio);
-		model->translateModel(translation);
-		model->rotateModel(axis);
-		M = model->getModelMatrix();
+	/*
+		M = glm::scale(M, glm::vec3(0.7f));
+		M = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
+		M = glm::rotate(M, (GLfloat)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 		*/
 
 		GLint idModelTransform = program->getModelMatrix();

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef FRAGMENTSHADER_H
-#define FRAGMENTSHADER_H
 
 #include "Headers.h"
 
@@ -15,4 +13,3 @@ public:
 	~FragmentShader();
 	GLuint GetFragment();
 };
-#endif

@@ -13,6 +13,7 @@ VertexShader::VertexShader()
 
 		"out vec3 color;"
 
+
 		"void main () {"
 		"     gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(vp, 1.0);"
 		"	  color = in_Color;"	
