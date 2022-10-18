@@ -2,7 +2,7 @@
 ZPG c++ project
 
 
-Project Properties -> C/C++ General/ Add. include. directories:
+### Project Properties -> C/C++ General/ Add. include. directories:
   
   ..\Libs\glfw-3.3.8.bin.WIN32\glfw-3.3.8.bin.WIN32\include
   
@@ -12,14 +12,14 @@ Project Properties -> C/C++ General/ Add. include. directories:
   ..\Libs\glm-master\glm-master
   
   
-  Linker / General / Add. Library directories:
+  ### Linker / General / Add. Library directories:
   
   ..\Libs\glfw-3.3.8.bin.WIN32\glfw-3.3.8.bin.WIN32\lib-vc2022
   
   
   ..\Libs\glew-2.1.0-win32\glew-2.1.0\lib\Release\Win32
   
- Linker / Input / Add dep.: 
+ ### Linker / Input / Add dep.: 
   
   opengl32.lib
   
