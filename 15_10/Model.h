@@ -14,7 +14,7 @@ private:
 	GLuint VBO;
 	GLuint VAO;
 
-	// glm::mat4 modelMatrix;
+	glm::mat4 modelMatrix;
 
 public:
 	Model();
@@ -23,6 +23,8 @@ public:
 	void drawModel();
 	glm::mat4 getModelMatrix();
 	void setModelMatrix(glm::mat4 modelMatrix);
+
+	glm::mat4 getTransformation();
 
 };
 #endif

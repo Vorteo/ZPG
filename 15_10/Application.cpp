@@ -113,16 +113,14 @@ void Application::Run()
 	glEnable(GL_DEPTH_TEST);
 
 
-	// PROJECTION Matrix
-	glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-
 	while (!glfwWindowShouldClose(this->window))
 	{
 		// clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		this->shaderProgram->UseProgram();
 		
-
+		// PROJECTION Matrix
+		glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
 		// VIEW Matrix		
 		glm::mat4 viewMatrix = this->camera->getCamera();
 
@@ -140,7 +138,7 @@ void Application::Run()
 
 		// update other events like input handling
 		glfwPollEvents();
-		// put the stuff we’ve been drawing onto the display
+		// put the stuff weï¿½ve been drawing onto the display
 		glfwSwapBuffers(this->window);
 	}
 	glfwDestroyWindow(this->window);

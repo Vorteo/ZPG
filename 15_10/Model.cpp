@@ -55,4 +55,10 @@ void Model::setModelMatrix(glm::mat4 modelMatrix)
 	this->modelMatrix = modelMatrix;
 }
 
+glm::mat4 Model::getTransformation()
+{
+	
+
+}
+
 
