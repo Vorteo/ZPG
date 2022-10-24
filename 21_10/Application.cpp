@@ -112,37 +112,34 @@ void Application::Setup()
 
 void Application::Run()
 {
-	glEnable(GL_DEPTH_TEST);
+	// LIGHT Position
+	glm::vec3 lightPosition(0.0f, 0.0f, 0.0f);
 
+	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(this->window))
 	{
-		// LIGHT
-		glm::vec3 lightPosition(0.0f, 5.0f, 0.0f);
-
 		// clear color and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		this->shaderProgram->UseProgram();
-		
-		// PROJECTION Matrix
-		glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-		// VIEW Matrix		
-		glm::mat4 viewMatrix = this->camera->getCamera();
 
-		GLint modelViewMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewMatrix");
-		GLint modelProjectionMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "projectionMatrix");
+		// UPDATE deltaTime per frame
+		this->camera->updateDeltaTime();
 		
+		// PROJECTION, VIEW Matrix
+		glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);		
+		glm::mat4 viewMatrix = this->camera->getCamera();
+		GLint modelViewMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewMatrix");
+		GLint modelProjectionMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "projectionMatrix");	
 		glUniformMatrix4fv(modelViewMatrix, 1, GL_FALSE, &viewMatrix[0][0]);
 		glUniformMatrix4fv(modelProjectionMatrix, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-		// send Light
+
+		// Send Light Position
 		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "lightPosition"), 1, glm::value_ptr(lightPosition));
-		// view Position
+		// Send View Position
 		glm::vec3 viewPosition = camera->getCameraPosition();
 		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewPosition"), 1, glm::value_ptr(viewPosition));
 		
-		// UPDATE deltaTime per frame
-		this->camera->updateDeltaTime();
-
 		//DRAW
 		this->scene->drawScene(this->shaderProgram);
 

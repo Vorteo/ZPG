@@ -15,7 +15,9 @@ void main () {
 
 	// Specular	
 	float specularStrength = 0.8;
-	float spec = pow(max(dot(viewVector, reflect(-lightVector, worldNorm)), 0.0), 16);
+    vec3 halfwayDir = normalize(lightVector + viewVector);
+
+	float spec = pow(max(dot(halfwayDir, worldNorm), 0.0), 16);
 	vec4 specular = specularStrength * spec * vec4( 0.385, 0.647, 0.812, 1.0);
 	
 	// DIFFUSE
@@ -24,6 +26,7 @@ void main () {
 
 	// Ambient
 	vec4 ambient = vec4(0.1, 0.1, 0.1, 1.0);
+
 	frag_color = ambient + diffuse + specular;
 
 }

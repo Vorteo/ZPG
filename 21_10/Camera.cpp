@@ -2,9 +2,9 @@
 
 Camera::Camera()
 {
-	this->cameraPosition = glm::vec3(-5.0f,0.0f,0.0f);
-	this->cameraTarget = glm::vec3(5.0f,5.0f,0.0f);
-	this->Up = glm::vec3(0.0f, 1.0f, 0.0f);
+	this->cameraPosition = glm::vec3(0.0f,0.0f,5.0f);
+	this->cameraTarget = glm::vec3(0.0f,3.0f,0.0f);
+	this->Up = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	this->deltaTime = 0.0f;
 	this->lastFrame = 0.0f;

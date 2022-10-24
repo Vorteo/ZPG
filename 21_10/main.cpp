@@ -28,8 +28,14 @@ int main(void)
 	Model* sphereModel = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
 	Application->AddModel(sphereModel);
 
-	//Model* suzieModel = new Model(suziFlat, sizeof(suziFlat) / sizeof(suziFlat[0]));
-	//Application->AddModel(suzieModel);
+	Model* sphereModel1 = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
+	Application->AddModel(sphereModel1);
+
+	Model* sphereModel2 = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
+	Application->AddModel(sphereModel2);
+
+	Model* sphereModel3 = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
+	Application->AddModel(sphereModel3);
 
 	Application->CheckStatus();
 	Application->Run();

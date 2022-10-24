@@ -6,11 +6,11 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
-out vec3 color;
-out vec4 WorldPos;
+out vec4 color;
+out vec4 worldPos;
 
 void main () {
-	gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(pointPosition, 1.0);
-	WorldPos = modelMatrix * vec4(pointPosition, 1.0);
-	color = pointColor;	
+	gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4(pointPosition, 1.0f);
+	worldPos = modelMatrix * vec4(pointPosition, 1.0);
+	color = vec4(pointColor, 1.0f);	
 }
