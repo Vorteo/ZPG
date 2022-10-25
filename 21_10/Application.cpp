@@ -124,9 +124,11 @@ void Application::Run()
 
 		// UPDATE deltaTime per frame
 		this->camera->updateDeltaTime();
-		
+
+		int width, height;
+		glfwGetWindowSize(this->window, &width, &height);
 		// PROJECTION, VIEW Matrix
-		glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);		
+		glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), (float) width / height, 0.1f, 100.0f);		
 		glm::mat4 viewMatrix = this->camera->getCamera();
 		GLint modelViewMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewMatrix");
 		GLint modelProjectionMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "projectionMatrix");	
