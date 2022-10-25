@@ -9,6 +9,8 @@ class ShaderProgram;
 class Camera 
 {
 private:
+	std::vector<ShaderProgram*> shaders;
+
 	glm::vec3 cameraPosition;
 	glm::vec3 cameraTarget;
 	glm::vec3 Up;
@@ -19,6 +21,9 @@ private:
 
 public:
 	Camera();
+
+	void attachShader(ShaderProgram* shader);
+
 	glm::mat4 getCamera();
 	glm::vec3 getCameraPosition();
 

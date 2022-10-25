@@ -137,10 +137,9 @@ void Application::Run()
 
 
 		// Send Light Position
-		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "lightPosition"), 1, glm::value_ptr(lightPosition));
+		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "lightPosition"), 1, glm::value_ptr(this->scene->getLightPosition()));
 		// Send View Position
-		glm::vec3 viewPosition = camera->getCameraPosition();
-		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewPosition"), 1, glm::value_ptr(viewPosition));
+		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewPosition"), 1, glm::value_ptr(camera->getCameraPosition()));
 		
 		//DRAW
 		this->scene->drawScene(this->shaderProgram);

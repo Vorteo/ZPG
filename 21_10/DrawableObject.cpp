@@ -1,9 +1,9 @@
 #include "DrawableObject.h"
 
-DrawableObject::DrawableObject(Model* model, ShaderProgram* shaderProgram, Transformation* transformation)
+DrawableObject::DrawableObject(Model* model, ShaderProgram* shader, Transformation* transformation)
 {
 	this->model = model;
-	this->shader = shaderProgram;
+	this->shader = shader;
 	this->transformation = transformation;
 }
 
@@ -14,7 +14,7 @@ DrawableObject::~DrawableObject()
 	delete this->transformation;
 }
 
-void DrawableObject::setShader(ShaderProgram* shaderProgram)
+void DrawableObject::setShader(ShaderProgram* shader)
 {
-	this->shader = shaderProgram;
+	this->shader = shader;
 }

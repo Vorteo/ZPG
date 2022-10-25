@@ -2,6 +2,8 @@
 
 Camera::Camera()
 {
+	this->shaders = std::vector<ShaderProgram*>();
+
 	this->cameraPosition = glm::vec3(0.0f,0.0f,5.0f);
 	this->cameraTarget = glm::vec3(0.0f,3.0f,0.0f);
 	this->Up = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -9,6 +11,11 @@ Camera::Camera()
 	this->deltaTime = 0.0f;
 	this->lastFrame = 0.0f;
 	this->cameraSpeed = 0.0f;
+}
+
+void Camera::attachShader(ShaderProgram* shader)
+{
+	this->shaders.push_back(shader);
 }
 
 glm::mat4 Camera::getCamera()

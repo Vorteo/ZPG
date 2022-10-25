@@ -9,9 +9,10 @@ private:
 	ShaderProgram* shader;
 	Model* model;
 	Transformation* transformation;
+
 public:
-	DrawableObject(Model* model, ShaderProgram* shaderProgram, Transformation* transformation);
+	DrawableObject(Model* model, ShaderProgram* shader, Transformation* transformation);
 	~DrawableObject();
 
-	void setShader(ShaderProgram* shaderProgram);
+	void setShader(ShaderProgram* shader);
 };

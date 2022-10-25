@@ -4,12 +4,14 @@ Scene::Scene()
 {
 	this->models = std::vector<Model*>();
 	this->camera = new Camera();
+	this->light = new Light();
 }
 
 Scene::~Scene()
 {
 	this->models.clear();
 	delete this->camera;
+	delete this->light;
 }
 
 void Scene::addModel(Model* model)
@@ -62,5 +64,10 @@ void Scene::drawScene(ShaderProgram* program)
 void Scene::setModelMatrixOfModel(glm::mat4 modelMatrix, int i)
 {
 	this->models[i]->setModelMatrix(modelMatrix);
+}
+
+glm::vec3 Scene::getLightPosition()
+{
+	return this->light->getPosition();
 }
 
