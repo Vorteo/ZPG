@@ -31,22 +31,22 @@ void Controller::key_callback(GLFWwindow* window, int key, int scancode, int act
 
 	if (key == GLFW_KEY_W && action == GLFW_PRESS)
 	{
-		Application::GetInstance()->getCamera()->toFront();
+		 Application::GetInstance()->getCamera()->toFront();
 	}
 
 	if (key == GLFW_KEY_S && action == GLFW_PRESS)
 	{
-		Application::GetInstance()->getCamera()->toBack();
+		 Application::GetInstance()->getCamera()->toBack();
 	}
 
 	if (key == GLFW_KEY_A && action == GLFW_PRESS)
 	{
-		Application::GetInstance()->getCamera()->toLeft();
+		 Application::GetInstance()->getCamera()->toLeft();
 	}
 
 	if (key == GLFW_KEY_D && action == GLFW_PRESS)
 	{
-		Application::GetInstance()->getCamera()->toRight();
+		 Application::GetInstance()->getCamera()->toRight();
 	}
 
 	printf("key_callback [%d,%d,%d,%d] \n", key, scancode, action, mods);
@@ -70,7 +70,7 @@ void Controller::window_size_callback(GLFWwindow* window, int width, int height)
 
 void Controller::cursor_callback(GLFWwindow* window, double x, double y)
 {
-
+	
 	if (Application::GetInstance()->getRightClick() == 1)
 	{
 		int width, height;
@@ -79,7 +79,7 @@ void Controller::cursor_callback(GLFWwindow* window, double x, double y)
 	}
 
 	printf("cursor_callback [%.1f,%.1f] \n", x, y);
-
+	
 }
 
 void Controller::button_callback(GLFWwindow* window, int button, int action, int mode)

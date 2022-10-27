@@ -3,8 +3,9 @@
 #define APPLICATION_H
 
 #include "Headers.h"
-#include "Controller.h"
+#include "Factory.h"
 #include "Scene.h"
+#include "Controller.h"
 #include "Model.h"
 #include "ShaderProgram.h"
 
@@ -16,8 +17,7 @@ class Application
 private:
 	static Application* instance;
 	Application();
-
-	GLint status;
+	
 	GLFWwindow* window;
 
 	Controller* controller;
@@ -35,7 +35,6 @@ public:
 
 	void VersionInfo();
 	void InitSpecificVersion();
-	void CheckStatus();
 	void Setup();
 	void Run();
 
@@ -43,6 +42,9 @@ public:
 
 	void setRightClick(int rightClick);
 	int getRightClick();
+
+	Factory* factory;
+	void setScene(Scene* scene);
 
 };
 #endif

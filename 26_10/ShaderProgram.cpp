@@ -13,17 +13,34 @@ ShaderProgram::ShaderProgram()
 
 ShaderProgram::ShaderProgram(const char* fragmentFile, const char* vertexFile)
 {
-	loadShader(vertexFile, fragmentFile);
+	this->loadShader(vertexFile, fragmentFile);
 
 	this->Program = glCreateProgram();
 	glAttachShader(this->Program, this->fragment->GetFragment());
 	glAttachShader(this->Program, this->vertex->GetVertex());
 	glLinkProgram(this->Program);
+	this->CheckStatus();
 }
 
 void ShaderProgram::UseProgram()
 {
 	glUseProgram(this->Program);
+}
+
+void ShaderProgram::CheckStatus()
+{
+	GLint status;
+
+	glGetProgramiv(this->Program, GL_LINK_STATUS, &status);
+	if (status == GL_FALSE)
+	{
+		GLint infoLogLength;
+		glGetProgramiv(this->Program, GL_INFO_LOG_LENGTH, &infoLogLength);
+		GLchar* strInfoLog = new GLchar[infoLogLength + 1];
+		glGetProgramInfoLog(this->Program, infoLogLength, NULL, strInfoLog);
+		fprintf(stderr, "Linker failure: %s\n", strInfoLog);
+		delete[] strInfoLog;
+	}
 }
 
 GLint ShaderProgram::getModelMatrix()

@@ -15,8 +15,9 @@ Application* Application::GetInstance()
 Application::Application()
 {
 	this->Setup();
+	this->factory = this->factory->GetInstance();
 	this->controller = this->controller->GetInstance();
-	this->shaderProgram = new ShaderProgram("PhongShader.frag", "PhongShader.vert");
+	this->shaderProgram = new ShaderProgram("ConstantShader.frag", "ConstantShader.vert");
 	this->scene = new Scene();
 	this->camera = new Camera();
 }
@@ -27,6 +28,7 @@ Application::~Application()
 	delete this->shaderProgram;
 	delete this->scene;
 	delete this->camera;
+	delete this->factory;
 }
 
 void Application::AddModel(Model* model)
@@ -55,26 +57,12 @@ void Application::VersionInfo()
 
 void Application::InitSpecificVersion()
 {
-
+	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-}
-
-void Application::CheckStatus()
-{
-	glGetProgramiv(this->shaderProgram->getShaderProgram(), GL_LINK_STATUS, &this->status);
-	if (this->status == GL_FALSE)
-	{
-		GLint infoLogLength;
-		glGetProgramiv(this->shaderProgram->getShaderProgram(), GL_INFO_LOG_LENGTH, &infoLogLength);
-		GLchar* strInfoLog = new GLchar[infoLogLength + 1];
-		glGetProgramInfoLog(this->shaderProgram->getShaderProgram(), infoLogLength, NULL, strInfoLog);
-		fprintf(stderr, "Linker failure: %s\n", strInfoLog);
-		delete[] strInfoLog;
-	}
+	
 }
 
 void Application::Setup()
@@ -124,11 +112,12 @@ void Application::Run()
 
 		int width, height;
 		glfwGetWindowSize(this->window, &width, &height);
+
 		// PROJECTION, VIEW Matrix
-		glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
+		glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), (float) width / height, 0.1f, 100.0f);		
 		glm::mat4 viewMatrix = this->camera->getCamera();
 		GLint modelViewMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewMatrix");
-		GLint modelProjectionMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "projectionMatrix");
+		GLint modelProjectionMatrix = glGetUniformLocation(this->shaderProgram->getShaderProgram(), "projectionMatrix");	
 		glUniformMatrix4fv(modelViewMatrix, 1, GL_FALSE, &viewMatrix[0][0]);
 		glUniformMatrix4fv(modelProjectionMatrix, 1, GL_FALSE, &projectionMatrix[0][0]);
 
@@ -136,14 +125,14 @@ void Application::Run()
 		// Send Light Position
 		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "lightPosition"), 1, glm::value_ptr(this->scene->getLightPosition()));
 		// Send View Position
-		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewPosition"), 1, glm::value_ptr(this->camera->getCameraPosition()));
-
+		glUniform3fv(glGetUniformLocation(this->shaderProgram->getShaderProgram(), "viewPosition"), 1, glm::value_ptr(camera->getCameraPosition()));
+		
 		//DRAW
 		this->scene->drawScene(this->shaderProgram);
 
 		// update other events like input handling
 		glfwPollEvents();
-		// put the stuff weï¿½ve been drawing onto the display
+		// put the stuff we’ve been drawing onto the display
 		glfwSwapBuffers(this->window);
 	}
 	glfwDestroyWindow(this->window);
@@ -165,5 +154,10 @@ void Application::setRightClick(int rightClick)
 int Application::getRightClick()
 {
 	return (this->rightClick);
+}
+
+void Application::setScene(Scene* scene)
+{
+	this->scene = scene;
 }
 

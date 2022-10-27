@@ -7,12 +7,11 @@
 
 #include<vector>
 
-class Scene
+class Scene 
 {
 private:
 	std::vector<Model*> models;
 	std::vector<DrawableObject*> objects;
-
 	Camera* camera;
 	Light* light;
 
@@ -22,7 +21,6 @@ public:
 
 	void addModel(Model* model);
 	void addDrawableObject(DrawableObject* object);
-
 	void drawScene(ShaderProgram* program);
 	glm::vec3 getLightPosition();
 };

@@ -20,6 +20,7 @@ public:
 
 	GLuint getShaderProgram();
 	void UseProgram();
+	void CheckStatus();
 	GLint getModelMatrix();
 };
 #endif

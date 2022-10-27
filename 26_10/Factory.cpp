@@ -1,4 +1,5 @@
 #include "Factory.h"
+#include "Models/sphere.h"
 
 Factory* Factory::instance = 0;
 
@@ -12,25 +13,39 @@ Factory* Factory::GetInstance()
 	return instance;
 }
 
-Factory::~Factory()
+DrawableObject* Factory::createSphereObject(int shaderType)
 {
-}
-
-DrawableObject Factory::createObject(int shaderType)
-{
+	const char* vertex;
+	const char* fragment;
 	switch (shaderType) {
 	case 1:
-		// lambert
+		vertex = "LambertShader.vert";
+		fragment = "LambertShader.frag";
 		break;
 	case 2:
-		// phong shader
+		vertex = "PhongShader.vert";
+		fragment = "PhongShader.frag";
 		break;
 	case 3:
-		// phong blinn shader
+		vertex = "BlinnPhongShader.vert";
+		fragment = "BlinnPhongShader.frag";
 		break;
 	default:
-		// konstantni shader
+		vertex = "ConstantShader.vert";
+		fragment = "ConstantShader.frag";
 	}
 
-	return DrawableObject(new Model(sphere, sizeof(sphere) / sizeof(sphere[0])), new ShaderProgram(), new Transformation());
+	return new DrawableObject(new Model(sphere, sizeof(sphere) / sizeof(sphere[0])), new ShaderProgram(fragment, vertex), new Transformation());
+}
+
+Scene* Factory::createSpheresScene()
+{
+	Scene* scene = new Scene();
+
+	scene->addDrawableObject(this->createSphereObject(0));
+	scene->addDrawableObject(this->createSphereObject(1));
+	scene->addDrawableObject(this->createSphereObject(2));
+	scene->addDrawableObject(this->createSphereObject(3));
+
+	return scene;
 }

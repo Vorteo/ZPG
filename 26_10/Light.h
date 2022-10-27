@@ -1,7 +1,7 @@
 #pragma once
 #include "Headers.h"
 
-class Light
+class Light 
 {
 private:
 	glm::vec3 position;

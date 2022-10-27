@@ -3,6 +3,7 @@
 Scene::Scene()
 {
 	this->models = std::vector<Model*>();
+	this->objects = std::vector<DrawableObject*>();
 	this->camera = new Camera();
 	this->light = new Light();
 }
@@ -10,6 +11,7 @@ Scene::Scene()
 Scene::~Scene()
 {
 	this->models.clear();
+	this->objects.clear();
 	delete this->camera;
 	delete this->light;
 }
@@ -21,7 +23,7 @@ void Scene::addModel(Model* model)
 
 void Scene::addDrawableObject(DrawableObject* object)
 {
-	this->objects.push_back(object);
+	objects.push_back(object);
 }
 
 void Scene::drawScene(ShaderProgram* program)
@@ -31,7 +33,7 @@ void Scene::drawScene(ShaderProgram* program)
 	for (Model* model : this->models)
 	{
 		glm::mat4 M = model->getModelMatrix();
-		/*
+	    /*
 		M = glm::scale(M, glm::vec3(0.7f));
 		M = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
 		M = glm::rotate(M, (GLfloat)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
@@ -50,7 +52,7 @@ void Scene::drawScene(ShaderProgram* program)
 		{
 			M = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 0.0f, 0.0f));
 		}
-		if (i == 3)
+		if(i == 3)
 		{
 			M = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -2.0f));
 		}
@@ -65,6 +67,7 @@ void Scene::drawScene(ShaderProgram* program)
 	}
 
 }
+
 
 glm::vec3 Scene::getLightPosition()
 {

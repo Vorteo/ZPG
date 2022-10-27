@@ -6,10 +6,11 @@
 #include "ShaderProgram.h"
 
 class ShaderProgram;
-class Camera
+class Camera 
 {
 private:
-	std::vector<ShaderProgram*> shaders;
+	//glm::mat4 viewMatrix;
+	//glm::mat4 projectionMatrix;
 
 	glm::vec3 cameraPosition;
 	glm::vec3 cameraTarget;
@@ -19,6 +20,7 @@ private:
 	float lastFrame;
 	float cameraSpeed;
 
+	std::vector<ShaderProgram*> shaders;
 public:
 	Camera();
 

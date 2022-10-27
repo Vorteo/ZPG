@@ -1,15 +1,16 @@
 #pragma once
-#include "Headers.h"
+#ifndef FACTORY_H
+#define FACTORY_H
 #include "DrawableObject.h"
-#include "Models/sphere.h"
+#include "Scene.h"
 
 class Factory
 {
 private:
 	static Factory* instance;
-	Factory();	
 public:
 	static Factory* GetInstance();
-	~Factory();
-	DrawableObject createObject(int shaderType);
+	DrawableObject* createSphereObject(int shaderType);
+	Scene* createSpheresScene();
 };
+#endif

@@ -4,8 +4,8 @@ Camera::Camera()
 {
 	this->shaders = std::vector<ShaderProgram*>();
 
-	this->cameraPosition = glm::vec3(0.0f, 0.0f, 5.0f);
-	this->cameraTarget = glm::vec3(0.0f, 3.0f, 0.0f);
+	this->cameraPosition = glm::vec3(0.0f,0.0f,5.0f);
+	this->cameraTarget = glm::vec3(0.0f,3.0f,0.0f);
 	this->Up = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	this->deltaTime = 0.0f;
@@ -40,7 +40,7 @@ void Camera::toRight()
 
 void Camera::toFront()
 {
-
+	
 	cameraPosition += this->getCameraSpeed() * (glm::normalize(cameraTarget));
 }
 
@@ -85,7 +85,7 @@ void Camera::updateDeltaTime()
 }
 
 float Camera::getCameraSpeed()
-{
+{	
 	this->cameraSpeed = 40.f * this->deltaTime;
 
 	return this->cameraSpeed;

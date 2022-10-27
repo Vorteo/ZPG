@@ -6,7 +6,7 @@
 class Model
 {
 private:
-	const float* points;
+	const float *points;
 	int size;
 
 	GLuint VBO;

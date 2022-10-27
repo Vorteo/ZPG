@@ -11,7 +11,7 @@ Model::Model()
 	this->modelMatrix = glm::mat4(1.0f);
 }
 
-Model::Model(const float points[], int size)
+Model::Model(const float points[],int size)
 {
 	this->points = points;
 	this->size = size;
@@ -29,8 +29,8 @@ Model::Model(const float points[], int size)
 	glEnableVertexAttribArray(0); //enable vertex attributes
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*)(sizeof(float) * 3));
-
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*) (sizeof(float) * 3));
+ 
 }
 
 Model::~Model()

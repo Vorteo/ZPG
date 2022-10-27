@@ -1,25 +1,26 @@
 #include "Application.h";
 #include "Model.h"
 #include "Models/sphere.h"
-#include "Models/suzi_flat.h"
-
+ 
 int main(void)
 {
 	//**** Run
-	Application* Application = Application->GetInstance();
+	Application* application = application->GetInstance();
 
+	//application->setScene(Factory::GetInstance()->createSpheresScene());
+
+ 
 	Model* sphereModel = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
-	Application->AddModel(sphereModel);
+	application->AddModel(sphereModel);
 
 	Model* sphereModel1 = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
-	Application->AddModel(sphereModel1);
+	application->AddModel(sphereModel1);
 
 	Model* sphereModel2 = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
-	Application->AddModel(sphereModel2);
+	application->AddModel(sphereModel2);
 
 	Model* sphereModel3 = new Model(sphere, sizeof(sphere) / sizeof(sphere[0]));
-	Application->AddModel(sphereModel3);
+	application->AddModel(sphereModel3);
 
-	Application->CheckStatus();
-	Application->Run();
+	application->Run();
 }
