@@ -5,6 +5,8 @@ ShaderProgram::ShaderProgram()
 	this->vertex = new VertexShader();
 	this->fragment = new FragmentShader();
 
+	this->observedCamera = nullptr;
+
 	this->Program = glCreateProgram();
 	glAttachShader(this->Program, this->fragment->GetFragment());
 	glAttachShader(this->Program, this->vertex->GetVertex());
@@ -14,6 +16,8 @@ ShaderProgram::ShaderProgram()
 ShaderProgram::ShaderProgram(const char* fragmentFile, const char* vertexFile)
 {
 	this->loadShader(vertexFile, fragmentFile);
+
+	this->observedCamera = nullptr;
 
 	this->Program = glCreateProgram();
 	glAttachShader(this->Program, this->fragment->GetFragment());
@@ -65,9 +69,31 @@ void ShaderProgram::setVec3(glm::vec3 vectr, const char* vectorName)
 	glUniform3fv(glGetUniformLocation(this->Program, vectorName), 1, glm::value_ptr(vectr));
 }
 
+
+void ShaderProgram::update(glm::mat4 matrixValue, const char* matrixName)
+{
+	this->setMatrix(matrixValue, matrixName);
+}
+/*
+void ShaderProgram::setObservedCamera(Camera* c)
+{
+	this->observedCamera = c;
+	if (!c->findShader(this))
+	{
+		c->attachShader(this);
+		c->update();
+	}
+	else
+	{
+		c->update();
+	}
+}
+*/
+
 ShaderProgram::~ShaderProgram()
 {
 	delete this->vertex;
 	delete this->fragment;
+	delete this->observedCamera;
 }
 

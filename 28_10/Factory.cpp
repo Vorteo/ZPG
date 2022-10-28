@@ -72,6 +72,7 @@ DrawableObject* Factory::createObject(int shaderType, int modelType, glm::mat4 t
 Scene* Factory::createSpheresScene()
 {
 	Scene* scene = new Scene();
+	scene->getCamera()->setCamera(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	scene->addDrawableObject(this->createObject(1, 1, glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f))));
 	scene->addDrawableObject(this->createObject(2, 1, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 2.0f))));
@@ -83,7 +84,7 @@ Scene* Factory::createSpheresScene()
 Scene* Factory::createOneSphereScene()
 {
 	Scene* scene = new Scene();
-
+	scene->getCamera()->setCamera(glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	scene->addDrawableObject(this->createObject(2, 1, glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f))));
 
@@ -111,6 +112,7 @@ Scene* Factory::createMultipleObjectsScene()
 		int rand_model = rand() % 5 + 1;
 		scene->addDrawableObject(this->createObject(rand_shader, rand_model, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f + (rand()% 100), 0.0f, 0.0f + (rand()% 100)))));
 	}
-	
+	scene->getCamera()->setCamera(glm::vec3(-10.0f, 5.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
 	return scene;
 }

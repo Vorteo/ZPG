@@ -8,10 +8,11 @@
 #include "Observer.h"
 
 class Camera;
-class ShaderProgram : public ShaderLoader
+class ShaderProgram : public Observer, public ShaderLoader
 {
 private:
 	GLuint Program;
+	Camera* observedCamera;
 
 public:
 	ShaderProgram();
@@ -24,5 +25,11 @@ public:
 
 	void setMatrix(glm::mat4 matrix, const char* matrixName);
 	void setVec3(glm::vec3 vectr, const char* vectorName);
+
+	
+	void update(glm::mat4 matrixValue, const char* matrixName);
+	/*
+	void setObservedCamera(Camera* c);
+	*/
 };
 #endif

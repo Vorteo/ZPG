@@ -2,7 +2,7 @@
 
 Camera::Camera()
 {
-	this->projectionMatrix = glm::mat4(1.0f);
+	this->projectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
 	this->viewMatrix = glm::mat4(1.0f);
 
 	this->shaders = std::vector<ShaderProgram*>();
@@ -16,24 +16,6 @@ Camera::Camera()
 	this->cameraSpeed = 0.0f;
 }
 
-void Camera::attachShader(ShaderProgram* shader)
-{
-	this->shaders.push_back(shader);
-}
-
-void Camera::notify()
-{
-	for (ShaderProgram* sp : shaders)
-	{
-
-	}
-}
-
-void Camera::update()
-{
-
-}
-
 void Camera::setCamera(glm::vec3 position, glm::vec3 target, glm::vec3 up)
 {
 	this->cameraPosition = position;
@@ -44,6 +26,8 @@ void Camera::setCamera(glm::vec3 position, glm::vec3 target, glm::vec3 up)
 glm::mat4 Camera::getCamera()
 {
 	this->viewMatrix = glm::lookAt(cameraPosition, cameraPosition + cameraTarget, Up);
+	//this->setChanges(this->viewMatrix, "viewMatrix");
+
 	return this->viewMatrix;
 }
 
@@ -55,22 +39,26 @@ glm::vec3 Camera::getCameraPosition()
 void Camera::toLeft()
 {
 	this->cameraPosition -= this->getCameraSpeed() * (glm::normalize(glm::cross(cameraTarget, Up)));
+	this->getCamera();
 }
 
 void Camera::toRight()
 {
 	cameraPosition += this->getCameraSpeed() * (glm::normalize(glm::cross(cameraTarget, Up)));
+	this->getCamera();
 }
 
 void Camera::toFront()
 {
 	
 	cameraPosition += this->getCameraSpeed() * (glm::normalize(cameraTarget));
+	this->getCamera();
 }
 
 void Camera::toBack()
 {
 	cameraPosition -= this->getCameraSpeed() * (glm::normalize(cameraTarget));
+	this->getCamera();
 }
 
 void Camera::mouseMove(double new_x, double new_y, int width, int height)
@@ -98,6 +86,7 @@ void Camera::mouseMove(double new_x, double new_y, int width, int height)
 	this->cameraTarget = direction;
 	this->Up = glm::cross(right, direction);
 
+	this->getCamera();
 }
 
 void Camera::updateDeltaTime()
@@ -114,3 +103,42 @@ float Camera::getCameraSpeed()
 
 	return this->cameraSpeed;
 }
+/*
+void Camera::attachShader(ShaderProgram* shader)
+{
+	this->shaders.push_back(shader);
+}
+
+bool Camera::findShader(ShaderProgram* shader)
+{
+	if (std::find(shaders.begin(), shaders.end(), shader) != shaders.end())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Camera::setChanges(glm::mat4 matrixValue, const char* matrixName)
+{
+	this->changedMatrixName = matrixName;
+	this->changedMatrixValue = matrixValue;
+	this->notify();
+}
+
+void Camera::notify()
+{
+	for (ShaderProgram* sp : shaders)
+	{
+		sp->update(this->changedMatrixValue, this->changedMatrixName);
+	}
+}
+
+void Camera::update()
+{
+	this->setChanges(this->projectionMatrix, "projectionMatrix");
+	this->getCamera();
+}
+*/

@@ -4,5 +4,5 @@
 class Observer
 {
 public:
-	virtual void update(glm::mat4 matrixValue, glm::mat4 matrixName) = 0;
+	virtual void update(glm::mat4 matrixValue, const char* matrixName) = 0;
 };
