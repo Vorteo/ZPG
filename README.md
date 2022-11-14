@@ -18,8 +18,9 @@ ZPG c++ project
   
   ..\Libs\glfw-3.3.8.bin.WIN32\glfw-3.3.8.bin.WIN32\lib-vc2022
   
-  
   ..\Libs\glew-2.1.0-win32\glew-2.1.0\lib\Release\Win32
+  
+    ..\Libs\soil\lib\
   
  ### Linker / Input / Add dep.: 
   
@@ -33,3 +34,5 @@ ZPG c++ project
   
   
   glew32.lib
+  
+  SOIL.lib
