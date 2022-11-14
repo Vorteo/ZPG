@@ -20,7 +20,7 @@ ZPG c++ project
   
   ..\Libs\glew-2.1.0-win32\glew-2.1.0\lib\Release\Win32
   
-    ..\Libs\soil\lib\
+  ..\Libs\soil\lib
   
  ### Linker / Input / Add dep.: 
   
