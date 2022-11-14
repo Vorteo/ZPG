@@ -46,7 +46,6 @@ void Scene::addDrawableObject(DrawableObject* object)
 }
 
 
-
 void Scene::drawScene(int width, int height)
 {
 	// UPDATE deltaTime per frame
@@ -54,6 +53,8 @@ void Scene::drawScene(int width, int height)
 
 	for (DrawableObject* obj : this->objects)
 	{	
+		//obj->setShader(this->phong);
+		
 		// use current object shader
 		obj->useShader();
 
@@ -66,16 +67,19 @@ void Scene::drawScene(int width, int height)
 
 		// Texture
 		obj->getShader()->bindTexture(obj->getTextureID());
+		//obj->getShader()->bindSkyBox(obj->getTextureID());
 
 		//PointLight	
 		obj->getShader()->setVec3(this->pointLight->getPosition(), "lights[0].position");
 		obj->getShader()->setInt(1, "lights[0].type");
+		
 		/*
 		//DirectionalLight
 		obj->getShader()->setVec3(this->directionalLight->getDirection(), "lights[1].direction");
 		obj->getShader()->setInt(2, "lights[1].type");
 		
 		//SpotLight
+		
 		obj->getShader()->setVec3(this->spotLight->getPosition(), "lights[2].position");
 		obj->getShader()->setVec3(this->spotLight->getDirection(), "lights[2].direction");
 		obj->getShader()->setFloat(this->spotLight->getCutOff(), "lights[2].cutOff");

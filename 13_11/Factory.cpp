@@ -101,7 +101,7 @@ DrawableObject* Factory::createObjectTexture(glm::mat4 transformationMatrix, con
 DrawableObject* Factory::createSkyBox()
 {
 	SkyBox* skybox = new SkyBox();
-	return new DrawableObject((Model*)skybox, new ShaderProgram("skybox.frag","skybox.vert"), new Transformation(glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f))));
+	return new DrawableObject((Model*)skybox, new ShaderProgram("skybox.frag","skybox.vert"), new Transformation(glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f))),1);
 }
 
 Scene* Factory::createSpheresScene()
