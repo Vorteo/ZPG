@@ -11,6 +11,8 @@ ZPG c++ project
   
   ..\Libs\glm-master\glm-master
   
+   ..\Libs\soil\include
+  
   
   ### Linker / General / Add. Library directories:
   
