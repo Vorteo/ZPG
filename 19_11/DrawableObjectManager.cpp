@@ -12,12 +12,12 @@ void DrawableObjectManager::addDrawableObject(DrawableObject* object)
 
 }
 
-void DrawableObjectManager::removeDrawableObject(int index)
+void DrawableObjectManager::removeDrawableObject(int position)
 {
-	this->objects.erase(this->objects.begin() + index);
+	this->objects.erase(this->objects.begin() + position);
 }
 
-DrawableObject* DrawableObjectManager::getDrawableObjectOnIndex(int index)
+DrawableObject* DrawableObjectManager::getDrawableObjectByIndex(int index)
 {
 	if (index < 0 || index >= this->objects.size())
 	{
@@ -26,7 +26,7 @@ DrawableObject* DrawableObjectManager::getDrawableObjectOnIndex(int index)
 	return this->objects[index];
 }
 
-int DrawableObjectManager::getNumberOfDrawableObjects()
+int DrawableObjectManager::getSize()
 {
 	return ((int)this->objects.size());
 }

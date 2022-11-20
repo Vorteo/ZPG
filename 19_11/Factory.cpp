@@ -93,6 +93,11 @@ DrawableObject* Factory::createSkyBox()
 	return new DrawableObject((Model*)skybox, nullptr, new Transformation(glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f))), 1);
 }
 
+void Factory::addTreeOnPosition(Scene* scene, glm::vec3 pos)
+{
+	scene->addDrawableObject(createObject(7, glm::translate(glm::mat4(1.0f), pos)), LAMBERT);
+}
+
 Scene* Factory::createSpheresScene()
 {
 	Scene* scene = new Scene();

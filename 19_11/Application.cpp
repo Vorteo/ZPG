@@ -95,6 +95,9 @@ void Application::Run()
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+	// ID do stencil bufferu
+	glEnable(GL_STENCIL_TEST);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
 	while (!glfwWindowShouldClose(this->window))
 	{
@@ -139,5 +142,10 @@ void Application::setScene(Scene* scene)
 Scene* Application::getScene()
 {
 	return this->scene;
+}
+
+Camera* Application::getCamera()
+{
+	return this->scene->getCamera();
 }
 

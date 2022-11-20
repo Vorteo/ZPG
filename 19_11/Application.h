@@ -40,5 +40,7 @@ public:
 	void setScene(Scene* scene);
 	Scene* getScene();
 
+	Camera* getCamera();
+
 };
 #endif

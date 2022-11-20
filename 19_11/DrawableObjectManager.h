@@ -14,6 +14,6 @@ public:
 	void addDrawableObject(DrawableObject* object);
 	void removeDrawableObject(int index);
 
-	DrawableObject* getDrawableObjectOnIndex(int index);
-	int getNumberOfDrawableObjects();
+	DrawableObject* getDrawableObjectByIndex(int position);
+	int getSize();
 };

@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef FACTORY_H
+#define FACTORY_H
 #include <map>
 #include "DrawableObject.h"
 #include "Scene.h"
@@ -20,9 +21,12 @@ public:
 	DrawableObject* createObjectTexture(glm::mat4 transformationMatrix, const char* textureName);
 	DrawableObject* createSkyBox();
 
+	void addTreeOnPosition(Scene* scene, glm::vec3 pos);
+
 	Scene* createSpheresScene();
 	Scene* createOneSphereScene();
 	Scene* createMultipleObjectsScene();
 	Scene* createTextureScene();
 	Scene* createSkyBoxScene();
 };
+#endif

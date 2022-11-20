@@ -92,7 +92,9 @@ void Scene::drawScene(int width, int height)
 	this->camera->updateDeltaTime();
 
 	for (DrawableObject* obj : this->objects)
-	{		
+	{
+		glStencilFunc(GL_ALWAYS, obj->getID(), 0xFF);
+
 		// use current object shader program
 		obj->useShader();
 

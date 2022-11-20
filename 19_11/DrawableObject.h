@@ -6,6 +6,8 @@
 class DrawableObject
 {
 private:
+	int objectID;
+
 	ShaderProgram* shader;
 	Model* model;
 	Transformation* transformation;
@@ -35,5 +37,7 @@ public:
 	void Draw(Camera* cam);
 
 	bool isTexture();
+
+	int getID();
 
 };

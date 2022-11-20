@@ -1,7 +1,11 @@
 #include "DrawableObject.h"
 
+int countID = 0;
+
 DrawableObject::DrawableObject()
 {
+	this->objectID = countID++;
+
 	this->shader = nullptr;
 	this->model = nullptr;
 	this->transformation = nullptr;
@@ -9,6 +13,8 @@ DrawableObject::DrawableObject()
 
 DrawableObject::DrawableObject(Model* model, ShaderProgram* shader, Transformation* transformation)
 {
+	this->objectID = countID++;
+
 	this->model = model;
 	this->shader = shader;
 	this->transformation = transformation;
@@ -16,6 +22,8 @@ DrawableObject::DrawableObject(Model* model, ShaderProgram* shader, Transformati
 
 DrawableObject::DrawableObject(Model* model, ShaderProgram* shader, Transformation* transformation, const char* textureName)
 {
+	this->objectID = countID++;
+
 	this->model = model;
 	this->shader = shader;
 	this->transformation = transformation;
@@ -32,6 +40,8 @@ DrawableObject::DrawableObject(Model* model, ShaderProgram* shader, Transformati
 
 DrawableObject::DrawableObject(Model* model, ShaderProgram* shader, Transformation* transformation, bool isSkybox)
 {
+	this->objectID = countID++;
+
 	this->model = model;
 	this->shader = shader;
 	this->transformation = transformation;
@@ -45,6 +55,8 @@ DrawableObject::DrawableObject(Model* model, ShaderProgram* shader, Transformati
 
 DrawableObject::~DrawableObject()
 {
+	this->objectID = -1;
+
 	delete this->model;
 	delete this->shader;
 	delete this->transformation;
@@ -108,4 +120,9 @@ void DrawableObject::Draw(Camera* cam)
 bool DrawableObject::isTexture()
 {
 	return this->texture;
+}
+
+int DrawableObject::getID()
+{
+	return this->objectID;
 }

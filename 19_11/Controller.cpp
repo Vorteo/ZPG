@@ -94,6 +94,40 @@ void Controller::button_callback(GLFWwindow* window, int button, int action, int
 		Application::GetInstance()->setRightClick(0);
 	}
 
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	{
+		GLbyte color[4];
+		GLfloat depth;
+		GLuint index;
+
+		double cur_x, cur_y;
+		glfwGetCursorPos(window, &cur_x, &cur_y);
+
+		GLint x = (GLint)cur_x;
+		GLint y = (GLint)cur_y;
+
+		int w, h;
+		glfwGetWindowSize(window, &w, &h);
+
+		int new_y = h - y;
+
+		glReadPixels(x, new_y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
+		glReadPixels(x, new_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+		glReadPixels(x, new_y, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+
+		printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
+		
+		glm::vec3 screenX = glm::vec3(x, new_y, depth);
+		glm::mat4 view = Application::GetInstance()->getCamera()->getCamera();
+		glm::mat4 projection = Application::GetInstance()->getCamera()->getProjectionMatrix();
+		glm::vec4 viewPort = glm::vec4(0, 0, w, h);
+		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
+
+		printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
+
+		Application::GetInstance()->factory->addTreeOnPosition(Application::GetInstance()->getScene(), pos);
+	}
+
 	if (action == GLFW_PRESS)
 	{
 		printf("button_callback [%d,%d,%d]\n", button, action, mode);
