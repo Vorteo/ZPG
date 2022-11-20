@@ -1,3 +1,3 @@
 
-chybi assimp, identifikace
+chybi assimp
 - pak jeste problemy s reflektorem
