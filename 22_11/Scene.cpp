@@ -105,22 +105,22 @@ void Scene::drawScene(int width, int height)
 		}
 
 		//PointLight
-		/*
+		
 		obj->getShader()->setVec3(this->pointLight->getPosition(), "lights[0].position");
 		obj->getShader()->setInt(1, "lights[0].type");
 		
-		
+		/*
 		//DirectionalLight
 		obj->getShader()->setVec3(this->directionalLight->getDirection(), "lights[1].direction");
 		obj->getShader()->setInt(2, "lights[1].type");
 		*/
 		//SpotLight
-		
-		obj->getShader()->setVec3(this->spotLight->getPosition(), "lights[0].position");
-		obj->getShader()->setVec3(this->spotLight->getDirection(), "lights[0].direction");
-		obj->getShader()->setFloat(this->spotLight->getCutOff(), "lights[0].cutOff");
-		obj->getShader()->setInt(3, "lights[0].type");
-		
+		/*
+		obj->getShader()->setVec3(this->spotLight->getPosition(), "lights[2].position");
+		obj->getShader()->setVec3(this->spotLight->getDirection(), "lights[2].direction");
+		obj->getShader()->setFloat(this->spotLight->getCutOff(), "lights[2].cutOff");
+		obj->getShader()->setInt(3, "lights[2].type");
+		*/
 
 		// View Position
 		obj->getShader()->setVec3(this->camera->getCameraPosition(), "viewPosition");
@@ -133,15 +133,15 @@ void Scene::drawScene(int width, int height)
 
 void Scene::drawSkyBox()
 {
+	if (this->skyboxObject != nullptr)
+	{
+		this->skyboxObject->useShader();
 
-	this->skyboxObject->useShader();
+		this->skyboxObject->getTransformation()->translateMatrix(this->camera->getCameraPosition());
 
-	this->skyboxObject->getTransformation()->translateMatrix(this->camera->getCameraPosition());
-
-	this->skyboxObject->getShader()->bindSkyBox(this->skyboxObject->getTextureID());
-	this->skyboxObject->Draw(this->camera);
-	
-
+		this->skyboxObject->getShader()->bindSkyBox(this->skyboxObject->getTextureID());
+		this->skyboxObject->Draw(this->camera);
+	}
 }
 
 glm::vec3 Scene::getLightPosition()

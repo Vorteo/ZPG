@@ -24,8 +24,6 @@ private:
 	DirectionalLight* directionalLight;
 	SpotLight* spotLight;
 
-
-	bool first = true;
 public:
 	Scene();
 	~Scene();
