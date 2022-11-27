@@ -1,2 +1,3 @@
 - vykreslovani je upravene pro kazdy Object
 - zbyva upravit jeste kod, refactoring
+- mozna jeste upravit svetla ve scene, moznost pridani do vektoru a posilani z vektoru ve smycce.
