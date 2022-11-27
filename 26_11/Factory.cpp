@@ -1,5 +1,6 @@
 #include "Factory.h"
 #include "AssimpModel.h"
+#include "Models.h"
 
 enum shaders
 {
@@ -135,7 +136,8 @@ Scene* Factory::createOneSphereScene()
 	Scene* scene = new Scene();
 	scene->getCamera()->setCamera(glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	scene->addDrawableObject(this->createObjectTexture(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -1.0f, 0.0f)), "grass.png"), PHONG_LIGHTS_TEXTURE);
+	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, 0.0f))), PHONG_LIGHTS);
+	scene->addDrawableObject(this->createObjectTexture(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)), "grass.png"), PHONG_LIGHTS_TEXTURE);
 
 	return scene;
 }
@@ -144,21 +146,21 @@ Scene* Factory::createMultipleObjectsScene()
 	Scene* scene = new Scene();
 	scene->getCamera()->setCamera(glm::vec3(-10.0f, 5.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f))), CONSTANT);
-	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 2.0f))), LAMBERT);
-	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 0.0f, 0.0f))), PHONG );
-	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -2.0f))), BLINNPHONG);
+	glm::mat4 M0 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+	M0 = glm::scale(M0, glm::vec3(100.0f));
+
+	scene->addDrawableObject(this->createObject(4, M0), LAMBERT);
 
 	srand(time(NULL));
 	for (int i = 0; i <= 100; i++)
 	{
-		int rand_shader = rand() % 4 + 0;	
+		int rand_shader = rand() % 3 + 1;	
 		scene->addDrawableObject(this->createObject(7, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f + (rand() % 100), 0.0f, 0.0f + (rand()% 100)))),rand_shader);
 		scene->addDrawableObject(this->createObject(6, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f + (rand() % 100), 0.0f, 0.0f + (rand() % 100)))), rand_shader);
 	}
 	for (int i = 0; i <= 100; i++)
 	{
-		int rand_shader = rand() % 4 + 0;
+		int rand_shader = rand() % 3 + 1;
 		int rand_model = rand() % 5 + 1;
 		scene->addDrawableObject(this->createObject(rand_model, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f + (rand()% 100), 0.0f, 0.0f + (rand()% 100)))), rand_shader);
 	}

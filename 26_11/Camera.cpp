@@ -46,6 +46,12 @@ glm::mat4 Camera::getProjectionMatrix()
 	return this->projectionMatrix;
 }
 
+void Camera::updatePerspective(int width, int height)
+{
+
+	this->projectionMatrix = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
+}
+
 void Camera::toLeft()
 {
 	this->cameraPosition -= this->getCameraSpeed() * (glm::normalize(glm::cross(cameraTarget, Up)));
@@ -109,15 +115,9 @@ void Camera::updateDeltaTime()
 
 float Camera::getCameraSpeed()
 {	
-	this->cameraSpeed = 40.f * this->deltaTime;
+	this->cameraSpeed = static_cast<float>(40 * this->deltaTime);
 
 	return this->cameraSpeed;
-}
-
-void Camera::updatePerspective(int width, int height)
-{
-
-	this->projectionMatrix = glm::perspective(glm::radians(45.0f), (float) width / height, 0.1f, 100.0f);
 }
 
 void Camera::attachShader(ShaderProgram* shader)

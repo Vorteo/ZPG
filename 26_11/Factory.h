@@ -4,7 +4,6 @@
 #include <map>
 #include "DrawableObject.h"
 #include "Scene.h"
-#include "Models.h"
 #include "SkyBox.h"
 
 class Factory
