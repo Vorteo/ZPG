@@ -1,3 +1,2 @@
 - vykreslovani je upravene pro kazdy Object
 - zbyva upravit jeste kod, refactoring
-- Observer
