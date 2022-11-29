@@ -20,7 +20,6 @@ private:
 	PointLight* pointLight;
 	DirectionalLight* directionalLight;
 	SpotLight* spotLight;
-	std::vector<Light*> ligtsObjects;
 	
 public:
 	Scene();
@@ -39,5 +38,4 @@ public:
 	Camera* getCamera();
 	void setCamera(glm::vec3 position, glm::vec3 target, glm::vec3 up);
 
-	void addLight(Light* light);
 };

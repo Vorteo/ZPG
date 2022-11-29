@@ -29,8 +29,6 @@ Scene::Scene()
 
 	this->spotLight = new SpotLight();
 	this->spotLight->setPosition(glm::vec3(0.0f, 10.0f, 0.0f));
-
-	this->ligtsObjects = std::vector<Light*>();
 }
 
 Scene::~Scene()
@@ -50,7 +48,6 @@ Scene::~Scene()
 	delete this->pointLight;
 	delete this->directionalLight;
 	delete this->spotLight;
-
 }
 
 void Scene::addDrawableObject(DrawableObject* object, int shaderType)
@@ -82,7 +79,6 @@ void Scene::addDrawableObject(DrawableObject* object, int shaderType)
 		
 	}
 
-	//this->manager->addDrawableObject(object);
 	this->objects.push_back(object);
 }
 
@@ -191,28 +187,6 @@ void Scene::drawAssimpObject(DrawableObject* obj)
 
 void Scene::setdLightsInShader(DrawableObject* obj)
 {
-	/*
-	int size = (int) this->ligtsObjects.size();
-	for (int i = 0; i < size; i++)
-	{
-		// Point Light
-		if (this->ligtsObjects[i]->getType() == 1)
-		{
-
-		}
-		// Directional Light
-		else if (this->ligtsObjects[i]->getType() == 2)
-		{
-
-		}
-		// Spot Light
-		else 
-		{
-
-		}
-	}
-	*/
-
 	//PointLight
 	/*
 	obj->getShader()->setVec3(this->pointLight->getPosition(), "lights[0].position");
@@ -245,11 +219,6 @@ Camera* Scene::getCamera()
 void Scene::setCamera(glm::vec3 position, glm::vec3 target, glm::vec3 up)
 {
 	this->camera->setCamera(position, target, up);
-}
-
-void Scene::addLight(Light* light)
-{
-	this->ligtsObjects.push_back(light);
 }
 
 
