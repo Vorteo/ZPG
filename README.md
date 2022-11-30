@@ -1,5 +1,4 @@
 # ZPG2022
-ZPG c++ project
 
 
 ### Project Properties -> C/C++ General/ Add. include. directories:
