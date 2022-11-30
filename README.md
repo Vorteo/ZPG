@@ -38,3 +38,5 @@ ZPG c++ project
   SOIL.lib
   
   assimp-vc140-mt.lib
+  
+  - po prvnim buildu pridat do debug slozky glew32.dll a  assimp-vc140-mt.dll
