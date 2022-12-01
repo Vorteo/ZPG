@@ -55,10 +55,10 @@ vec4 calculateDirectionalLight(Light light,  vec3 viewVector)
 	float diff = max(dot(lightVector, worldNorm), 0.0);
 	diffuse = diff * texture(textureUnitID, uvc) * vec4(light.color_of_light, 1.0);
 
-	float shininess = 0.8;
+	float shininess = 0.01;
 	if(dot(lightVector, worldNorm) > 0)
 	{
-		float spec = pow(max(dot(viewVector, reflect(-lightVector, worldNorm)), 0.0), 40);
+		float spec = pow(max(dot(viewVector, reflect(-lightVector, worldNorm)), 0.0), 8);
 		specular = shininess * spec * vec4(light.color_of_light, 1.0);	
 	}
 
@@ -82,8 +82,8 @@ vec4 calculateSpotLight(Light light, vec3 viewVector)
 	float diff = max(dot(lightVector, worldNorm), 0.0);
 	diffuse = diff * texture(textureUnitID, uvc) * attenuation;
 		
-	float shininess = 0.8;
-	float spec = pow(max(dot(viewVector, reflect(-lightVector, worldNorm)), 0.0), 40);
+	float shininess = 0.6;
+	float spec = pow(max(dot(viewVector, reflect(-lightVector, worldNorm)), 0.0), 32);
 	specular = shininess * spec * vec4(0.385, 0.647, 0.812, 1.0);	
 
 	diffuse *= intensity;
