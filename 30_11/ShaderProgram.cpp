@@ -26,7 +26,7 @@ ShaderProgram::ShaderProgram(const char* fragmentFile, const char* vertexFile)
 	this->CheckStatus();
 }
 
-void ShaderProgram::UseProgram()
+void ShaderProgram::ActivateProgram()
 {
 	glUseProgram(this->Program);
 }

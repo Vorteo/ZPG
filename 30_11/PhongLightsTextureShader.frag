@@ -1,6 +1,7 @@
 #version 450
 
-#define MAX_LIGHTS 3
+#define MAX_LIGHTS 5
+
 struct Light {
     vec3 position, direction, color_of_light;
     float cutOff, outer_cutOff;
@@ -16,7 +17,7 @@ out vec4 frag_color;
 uniform Light lights[MAX_LIGHTS];
 uniform vec3 viewPosition;
 uniform sampler2D textureUnitID;
-
+uniform int numOfLights;
 
 vec4 calculatePointLight(Light light,  vec3 viewVector)
 {
@@ -96,7 +97,7 @@ void main() {
 
 	vec3 viewVector = normalize(viewPosition - worldPos.xyz / worldPos.w);
    
-   for(int i = 0 ; i < MAX_LIGHTS; i++)
+   for(int i = 0 ; i < numOfLights; i++)
 	{		
 		if(lights[i].type == 1)
 		{

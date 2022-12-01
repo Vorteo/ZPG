@@ -20,7 +20,6 @@ private:
 	Scene* scene;
 
 	int rightClick = 0;
-
 public:
 	static Application* GetInstance();
 	~Application();
@@ -29,7 +28,6 @@ public:
 	void InitSpecificVersion();
 	void Setup();
 	void Run();
-
 
 	void setRightClick(int rightClick);
 	int getRightClick();
@@ -40,7 +38,5 @@ public:
 	Scene* getScene();
 
 	Camera* getCamera();
-
-
 };
 #endif

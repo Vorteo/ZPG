@@ -24,17 +24,14 @@ Scene::Scene()
 	this->lights->setObservedCamera(this->camera);
 	this->assimp->setObservedCamera(this->camera);
 
-	this->pointLight = new PointLight();
-
-	this->directionalLight = new DirectionalLight(glm::vec3(0.0f, 0.1f, 1.0f));
-	this->directionalLight->setColor(glm::vec3(1.0f, 0.72f, 0.56f));
-
-	this->spotLight = new SpotLight();
-	this->spotLight->setPosition(glm::vec3(0.0f, 10.0f, 0.0f));
+	this->lightObjects = std::vector<Light*>();
 }
 
 Scene::~Scene()
 {
+	this->objects.clear();
+	this->lightObjects.clear();
+
 	delete this->skyboxObject;
 
 	delete this->camera;
@@ -47,9 +44,6 @@ Scene::~Scene()
 	delete this->skybox;
 	delete this->lights;
 
-	delete this->pointLight;
-	delete this->directionalLight;
-	delete this->spotLight;
 }
 
 void Scene::addDrawableObject(DrawableObject* object, int shaderType)
@@ -116,8 +110,10 @@ void Scene::drawScene(int width, int height)
 		else
 		{
 			obj->getShader()->setVec3(this->camera->getCameraPosition(), "viewPosition");
-			obj->getShader()->setVec3(this->pointLight->getPosition(), "lightPosition");
-			
+			/*
+			PointLight* point = new PointLight();
+			obj->getShader()->setVec3(point->getPosition(), "lightPosition");
+			*/
 			this->sendLights(obj);
 
 			obj->Draw(this->camera);
@@ -146,7 +142,10 @@ void Scene::drawTextureObject(DrawableObject* obj)
 	obj->getShader()->bindTexture(obj->getTextureID());
 
 	obj->getShader()->setVec3(this->camera->getCameraPosition(), "viewPosition");
-	obj->getShader()->setVec3(this->pointLight->getPosition(), "lightPosition");
+	/*
+	PointLight* point = new PointLight();
+	obj->getShader()->setVec3(point->getPosition(), "lightPosition");
+	*/
 
 	this->sendLights(obj);
 
@@ -186,33 +185,44 @@ void Scene::drawAssimpObject(DrawableObject* obj)
 
 void Scene::sendLights(DrawableObject* obj)
 {
-	/*
-	//PointLight
-	this->pointLight->setPosition(glm::vec3(0.0f,1.0f,0.0f));
-	obj->getShader()->setVec3(this->pointLight->getPosition(), "lights[0].position");
-	//obj->getShader()->setVec3(this->pointLight->getColor(), "lights[0].color_of_light");
-	obj->getShader()->setInt(1, "lights[0].type");
-	*/
-
-	//DirectionalLight
-	obj->getShader()->setVec3(this->directionalLight->getDirection(), "lights[1].direction");
-	obj->getShader()->setVec3(this->directionalLight->getColor(), "lights[1].color_of_light");
-	obj->getShader()->setInt(2, "lights[1].type");
+	int size = (int)this->lightObjects.size();
 	
+	obj->getShader()->setInt(size, "numOfLights");
 
-	//SpotLight
-	this->spotLight->setPosition(this->camera->getCameraPosition());
-	this->spotLight->setDirection(this->camera->getCameraDirection());
+	for (int i = 0; i < size; i++)
+	{
+		std::string name = "lights[" + std::to_string(i) + "]";
+		int type = this->lightObjects[i]->getType();
+		if (type == 1)
+		{
+			PointLight* p = (PointLight*)this->lightObjects[i];
 
-	obj->getShader()->setVec3(this->spotLight->getPosition(), "lights[2].position");
-	obj->getShader()->setVec3(this->spotLight->getDirection(), "lights[2].direction");
-	obj->getShader()->setFloat(this->spotLight->getCutOff(), "lights[2].cutOff");
-	obj->getShader()->setFloat(this->spotLight->getOuterCutOff(), "lights[2].outer_cutOff");
-	obj->getShader()->setFloat(this->spotLight->getConstant(), "lights[2].constant");
-	obj->getShader()->setFloat(this->spotLight->getLinear(), "lights[2].linear");
-	obj->getShader()->setFloat(this->spotLight->getQuadratic(), "lights[2].quadratic");
-	obj->getShader()->setInt(3, "lights[2].type");
-	
+			obj->getShader()->setVec3(p->getPosition(), (name + ".position").c_str());
+			obj->getShader()->setInt(p->getType(), (name + ".type").c_str());
+		}
+		else if (type == 2)
+		{
+			DirectionalLight* d = (DirectionalLight*)this->lightObjects[i];
+			obj->getShader()->setVec3(d->getDirection(), (name + ".direction").c_str());
+			obj->getShader()->setVec3(d->getColor(), (name + ".color_of_light").c_str());
+			obj->getShader()->setInt(d->getType(), (name + ".type").c_str());
+		}
+		else if (type == 3)
+		{
+			SpotLight* s = (SpotLight*)this->lightObjects[i];
+			s->setPosition(this->camera->getCameraPosition());
+			s->setDirection(this->camera->getCameraDirection());
+
+			obj->getShader()->setVec3(s->getPosition(), (name + ".position").c_str());
+			obj->getShader()->setVec3(s->getDirection(), (name + ".direction").c_str());
+			obj->getShader()->setFloat(s->getCutOff(), (name + ".cutOff").c_str());
+			obj->getShader()->setFloat(s->getOuterCutOff(), (name + ".outer_cutOff").c_str());
+			obj->getShader()->setFloat(s->getConstant(), (name + ".constant").c_str());
+			obj->getShader()->setFloat(s->getLinear(), (name + ".linear").c_str());
+			obj->getShader()->setFloat(s->getQuadratic(), (name + ".quadratic").c_str());
+			obj->getShader()->setInt(s->getType(), (name + ".type").c_str());
+		}
+	}
 }
 
 Camera* Scene::getCamera()
@@ -223,6 +233,11 @@ Camera* Scene::getCamera()
 void Scene::setCamera(glm::vec3 position, glm::vec3 target, glm::vec3 up)
 {
 	this->camera->setCamera(position, target, up);
+}
+
+void Scene::addLight(Light* light)
+{
+	this->lightObjects.push_back(light);
 }
 
 

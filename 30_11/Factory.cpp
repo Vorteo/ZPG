@@ -173,9 +173,9 @@ Scene* Factory::createTextureScene()
 	Scene* scene = new Scene();
 	scene->setCamera(glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	scene->addDrawableObject(this->createObjectTexture(glm::translate(glm::mat4(1.0f), glm::vec3(3.0f, 0.0f, 0.0f)),"test.png"), PHONG_LIGHTS_TEXTURE);
-	scene->addDrawableObject(this->createObjectTexture(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 3.0f)), "grass.png"), PHONG_LIGHTS_TEXTURE);
-	scene->addDrawableObject(this->createObjectTexture(glm::translate(glm::mat4(1.0f), glm::vec3(-3.0f, 0.0f, 0.0f)), "wooden_fence.png"), PHONG_LIGHTS_TEXTURE);
+	scene->addDrawableObject(this->createObjectTexture(glm::translate(glm::mat4(1.0f), glm::vec3(3.0f, 0.0f, 0.0f)),"test.png"), TEXTURE);
+	scene->addDrawableObject(this->createObjectTexture(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 3.0f)), "grass.png"), TEXTURE);
+	scene->addDrawableObject(this->createObjectTexture(glm::translate(glm::mat4(1.0f), glm::vec3(-3.0f, 0.0f, 0.0f)), "wooden_fence.png"), TEXTURE);
 
 	return scene;
 }
@@ -187,11 +187,6 @@ Scene* Factory::createSkyBoxScene()
 
 	scene->addDrawableObject(this->createObjectTexture(glm::scale(glm::mat4(1.0f), glm::vec3(20.0f)), "grass.png"), TEXTURE);
 
-	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 1.0f, 0.0f))), PHONG_LIGHTS);
-	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, 2.0f))), PHONG_LIGHTS);
-	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 1.0f, 0.0f))), PHONG_LIGHTS);
-	scene->addDrawableObject(this->createObject(1, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, -2.0f))), PHONG_LIGHTS);
-
 	return scene;
 }
 
@@ -199,10 +194,17 @@ Scene* Factory::createAssimpScene()
 {
 	Scene* scene = new Scene();
 
+	scene->addLight(new SpotLight());
+	scene->addLight(new DirectionalLight(glm::vec3(1.0f, 0.72f, 0.56f), glm::vec3(0.0f, 0.1f, 1.0f)));
+	scene->addLight(new DirectionalLight(glm::vec3(1.0f, 0.72f, 0.56f), glm::vec3(0.0f, -1.0f, 5.0f)));
+	//scene->addLight(new PointLight());
+
+
 	scene->setSkybox(this->createSkyBox());
 
 	scene->addDrawableObject(this->createAssimpModel("AssimpModels/teren/teren.obj", "AssimpModels/teren/grass.png", glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -1.0f, 0.0f))), PHONG_LIGHTS_TEXTURE);
 	scene->addDrawableObject(this->createAssimpModel("AssimpModels/zombie/zombie.obj","AssimpModels/zombie/zombie.png", glm::translate(glm::mat4(1.0f), glm::vec3(-5.0f, -1.0f, 0.0f))), PHONG_LIGHTS_TEXTURE);
+	scene->addDrawableObject(this->createAssimpModel("AssimpModels/tree/tree.obj", "AssimpModels/tree/tree.png", glm::translate(glm::mat4(1.0f), glm::vec3(-5.0f, -1.0f, -5.0f))), PHONG_LIGHTS_TEXTURE);
 	scene->addDrawableObject(this->createAssimpModel("AssimpModels/house/model.obj", "AssimpModels/house/model.png", glm::translate(glm::mat4(1.0f), glm::vec3(10.0f, -1.0f, 0.0f))), PHONG_LIGHTS_TEXTURE);
 	
 	return scene;

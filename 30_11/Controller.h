@@ -1,7 +1,6 @@
 #pragma once
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-
 #include "Application.h"
 
 using namespace std;

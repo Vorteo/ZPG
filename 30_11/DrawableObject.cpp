@@ -133,7 +133,7 @@ GLuint DrawableObject::getTextureID()
 
 void DrawableObject::useShader()
 {
-	this->shader->UseProgram();
+	this->shader->ActivateProgram();
 }
 
 void DrawableObject::Draw(Camera* cam)

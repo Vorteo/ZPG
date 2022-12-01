@@ -113,11 +113,10 @@ void Application::Run()
 
 		// Update perspective 
 		this->scene->getCamera()->updatePerspective(width, height);
-
-		
+	
 		//DRAW SkyBox
 		this->scene->drawSkyBox();
-		// po vykresleni skyboxu vycistit depth buffer
+
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		//DRAW objects
@@ -140,7 +139,7 @@ void Application::setRightClick(int rightClick)
 
 int Application::getRightClick()
 {
-	return (this->rightClick);
+	return this->rightClick;
 }
 
 void Application::setScene(Scene* scene)

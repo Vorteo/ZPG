@@ -36,7 +36,6 @@ public:
 	void updatePerspective(int width, int height);
 	glm::mat4 getProjectionMatrix();
 
-	// Camera movement methods
 	void toLeft();
 	void toRight();
 	void toFront();

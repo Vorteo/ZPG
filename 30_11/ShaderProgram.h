@@ -19,7 +19,7 @@ public:
 	ShaderProgram(const char* fragmentFile, const char* vertexFile);
 	~ShaderProgram();
 
-	void UseProgram();
+	void ActivateProgram();
 	void DeactivateProgram();
 
 	void CheckStatus();
