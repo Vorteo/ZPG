@@ -1,1 +1,0 @@
-- chybi posledni dve temata - normal mapping a pohyb po krivce
