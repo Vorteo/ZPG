@@ -1,0 +1,1 @@
+- chybi tema normal mapping a krivka
