@@ -1,5 +1,5 @@
 # ZPG2022
-
+ZPG - Projekt, jednoduchý herní engine
 
 ### Project Properties -> C/C++ General/ Add. include. directories:
   
